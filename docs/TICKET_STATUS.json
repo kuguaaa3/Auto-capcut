@@ -1,0 +1,70 @@
+{
+  "spec_issue": 1,
+  "tickets": {
+    "T01": {
+      "issue": 2,
+      "status": "ready",
+      "evidence": []
+    },
+    "T02": {
+      "issue": 3,
+      "status": "blocked",
+      "evidence": []
+    },
+    "T03": {
+      "issue": 4,
+      "status": "blocked",
+      "evidence": []
+    },
+    "T04": {
+      "issue": 5,
+      "status": "blocked",
+      "evidence": []
+    },
+    "T05": {
+      "issue": 6,
+      "status": "blocked",
+      "evidence": []
+    },
+    "T06": {
+      "issue": 7,
+      "status": "blocked",
+      "evidence": []
+    },
+    "T07": {
+      "issue": 8,
+      "status": "blocked",
+      "evidence": []
+    },
+    "T08": {
+      "issue": 9,
+      "status": "blocked",
+      "evidence": []
+    },
+    "T09": {
+      "issue": 10,
+      "status": "blocked",
+      "evidence": []
+    },
+    "T10": {
+      "issue": 11,
+      "status": "blocked",
+      "evidence": []
+    },
+    "T11": {
+      "issue": 13,
+      "status": "blocked",
+      "evidence": []
+    },
+    "T12": {
+      "issue": 14,
+      "status": "blocked",
+      "evidence": []
+    },
+    "T13": {
+      "issue": 15,
+      "status": "blocked",
+      "evidence": []
+    }
+  }
+}

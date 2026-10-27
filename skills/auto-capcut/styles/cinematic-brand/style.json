@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "id": "cinematic-brand",
+  "name": "电影感品牌",
+  "description": "具有统一视觉主题的品牌或氛围素材",
+  "source": "builtin",
+  "version": "1.0.0",
+  "compatibility": [
+    "capcut_official"
+  ],
+  "trust": "reviewed-knowledge",
+  "status": "draft",
+  "review_gates": ["exposure_match","composition_continuity"],
+  "approved_at": null,
+  "suitable_for": "具有统一视觉主题的品牌或氛围素材",
+  "not_suitable_for": "仅靠黑边、颗粒或滤镜掩盖素材问题",
+  "inputs": [
+    "可读取且允许使用的素材",
+    "实际内容证据或用户明确标注",
+    "目标时长与画幅"
+  ],
+  "default_behavior": "用户显式要求优先；按素材证据调整节奏，不机械套用固定镜头秒数。",
+  "decision_rules": [
+    "先校正同场景曝光与色彩，再决定一致的风格化方向。",
+    "用景别、构图与运动的连续关系组织镜头，给关键画面留呼吸。",
+    "环境声与音效建立空间，包装保持克制并服务主题。"
+  ],
+  "required_capabilities": [
+    "material-analysis",
+    "color",
+    "audio",
+    "visuals",
+    "qa"
+  ],
+  "quality_rules": [
+    "画面和声音空间统一，主题清楚",
+    "计划边界正确；导出媒体与可编辑工程分别验收。"
+  ],
+  "anti_patterns": [
+    "无依据套黑边颗粒",
+    "过度调色损坏主体细节"
+  ],
+  "fallback": "素材证据不足则标缺；官方能力未验证则 blocked，不切换编辑引擎。",
+  "origin": [
+    {
+      "name": "clip-skills",
+      "url": "https://github.com/appergb/ClipSkills/blob/main/clip-skills/SKILL.md",
+      "blob_sha": "329c50d23783bbb5b4aa39dc7d2ec855cc00738c",
+      "license": "MIT",
+      "license_path": "../../references/licenses/clip-skills.txt",
+      "trust": "research-only"
+    },
+    {
+      "name": "product-shot",
+      "url": "https://github.com/Vincentwei1021/video-shotcraft/blob/main/SKILL.md",
+      "blob_sha": "695faad1d7441597a89dea4bd1b44b835005af7c",
+      "license": "Apache-2.0",
+      "license_path": "../../references/licenses/product-shot.txt",
+      "trust": "research-only"
+    }
+  ],
+  "license": "Personal noncommercial project; retain each upstream license"
+}
