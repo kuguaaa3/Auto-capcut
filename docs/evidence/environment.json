@@ -21,7 +21,8 @@
     "authorization": "incomplete",
     "authorization_result": "timed out waiting for OAuth callback",
     "authorization_process_exit_code": 1,
-    "native_tools_discovered_in_this_chat": [],
+    "protected_native_tools_discovered_in_this_chat": [],
+    "identity_free_presentation_tools_now_visible": ["background_music", "billing_confirmation", "editing_plan", "templates_preview", "templates_preview_v2", "video_preview"],
     "actual_editing": "blocked",
     "real_media_export": "not_run",
     "editable_project_reopen": "not_run"

@@ -86,6 +86,8 @@ class ProjectStore:
                    'editor': {'backend': 'capcut_official', 'capability_snapshot_id': None},
                    'last_error': None, 'last_confirmed_operation': None, 'plan_revision': None,
                    'assets_revision': None}
+        project['execution_preference'] = 'direct'
+        project['confirmed_plan_revision'] = None
         project['resume_status'] = None
         atomic_json(path / 'snapshots' / 'v000.json', project)
         atomic_json(path / 'project.json', project)
@@ -97,6 +99,8 @@ class ProjectStore:
             project = json.loads(path.read_text(encoding='utf-8'))
             if project.get('project_id') != project_id or not isinstance(project.get('current_revision'), int):
                 raise ValueError('Project identity or revision is invalid')
+            project.setdefault('execution_preference', 'direct')
+            project.setdefault('confirmed_plan_revision', None)
             return project
         except FileNotFoundError as exc:
             raise AutoCapcutError('E_PROJECT', 'Project was not found.', 'List projects and select an existing project_id.') from exc
@@ -136,6 +140,8 @@ class ProjectStore:
             raise AutoCapcutError('E_STATE', 'Update includes unknown or protected project fields.')
         changed = deepcopy(project)
         changed.update(deepcopy(changes))
+        if changed['execution_preference'] not in ('direct', 'plan-first'):
+            raise AutoCapcutError('E_STATE', 'Execution preference must be direct or plan-first.')
         if changed['status'] not in {'NEW', 'INPUT_READY', 'STYLE_SELECTED', 'PLANNED', 'EDITING',
                                      'DRAFT_READY', 'REVIEWED', 'EXPORTED', 'BLOCKED', 'PAUSED'}:
             raise AutoCapcutError('E_STATE', 'Unknown project status.')
@@ -207,7 +213,8 @@ class ProjectStore:
             # Reserve the same revision as the plan even after a prior crash left
             # an orphan plan. _commit allocates from snapshots, so skip the gap.
             project['current_revision'] = revision - 1
-            return self._commit(path, project, {'status': 'PLANNED', 'plan_revision': revision, 'last_error': None})
+            return self._commit(path, project, {'status': 'PLANNED', 'plan_revision': revision,
+                                               'confirmed_plan_revision': None, 'last_error': None})
 
     def load_plan(self, project_id: str, revision: int | None = None) -> dict:
         project = self.load(project_id)
@@ -235,6 +242,7 @@ class ProjectStore:
             atomic_json(path / 'snapshots' / f'assets-v{revision:03d}.json', assets)
             project['current_revision'] = revision - 1
             result = self._commit(path, project, {'status': 'INPUT_READY', 'last_error': None,
+                                                 'confirmed_plan_revision': None,
                                                  'assets_revision': revision})
             atomic_json(path / 'assets.json', assets)
             return result

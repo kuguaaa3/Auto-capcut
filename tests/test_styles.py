@@ -19,6 +19,22 @@ class StyleTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.registry = StyleRegistry(ROOT / 'skills/auto-capcut', self.temp.name)
 
+    def test_reusable_aspect_ratios_are_allowed_but_source_timecodes_are_rejected(self):
+        rules = ['保持 9:16 画幅并保留主体。', '横版可采用 16:9 画幅。', '保留真实动作的连续性。']
+        proposed = self.registry.propose('portrait-rules', '画幅规则', rules)
+        self.assertEqual(proposed['decision_rules'], rules)
+        with self.assertRaises(AutoCapcutError):
+            self.registry.propose('source-time', '一次性片段', ['在 00:12 切镜。', *rules[1:]])
+
+    def test_invalid_converted_proposal_cannot_poison_catalogue(self):
+        before = self.registry.list()
+        proposal = dict(next(s for s in before if s['id'] == 'pet-healing'))
+        proposal.update(id='my-healing', name='我的治愈')
+        with self.assertRaises(AutoCapcutError):
+            self.registry.save(proposal, approved=True)
+        self.assertEqual(self.registry.list(), before)
+        self.assertFalse((Path(self.temp.name) / 'learned-skills/my-healing/active.json').exists())
+
     def test_builtin_catalog_is_exactly_the_ten_approved_main_styles(self):
         self.assertEqual({s['id'] for s in self.registry.list()}, {
             'comedy-reversal', 'pet-healing', 'narrative-drama',

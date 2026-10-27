@@ -34,10 +34,10 @@ def parser():
     project.add_argument('--goal', required=True)
     project.add_argument('--format', action='append', dest='formats')
     sub.add_parser('projects')
-    for command in ('show', 'context', 'assets', 'select', 'plan', 'revise', 'pause', 'resume', 'capabilities', 'operation'):
+    for command in ('show', 'context', 'assets', 'select', 'plan', 'revise', 'pause', 'resume', 'capabilities', 'operation', 'set-mode', 'confirm-plan'):
         item = sub.add_parser(command)
         item.add_argument('project_id')
-        if command in ('assets', 'select', 'plan', 'revise', 'pause', 'resume', 'capabilities', 'operation'):
+        if command not in ('show', 'context'):
             item.add_argument('--expected-revision', type=int, required=True)
         if command == 'assets':
             item.add_argument('paths', nargs='+')
@@ -52,6 +52,8 @@ def parser():
             item.add_argument('--file', required=True, help='Current actual discovery snapshot')
         elif command == 'operation':
             item.add_argument('--file', required=True, help='Native-tool handoff request')
+        elif command == 'set-mode':
+            item.add_argument('mode', choices=['direct', 'plan-first'])
     finish = sub.add_parser('settle', help='Journal a real native-tool result; does not declare export complete')
     finish.add_argument('project_id')
     finish.add_argument('--id', required=True)
@@ -136,7 +138,11 @@ def execute(args):
         style = StyleRegistry(SKILL_ROOT, args.workspace).select(explicit={'id': args.id, 'version': args.version})
         selection = {k: style[k] for k in ('id', 'name', 'version', 'source') if k in style}
         selection['confirmed_by_user'] = True
-        return store.update(args.project_id, args.expected_revision, {'style': selection, 'status': 'STYLE_SELECTED'})
+        changes = {'style': selection}
+        previous = project.get('style') or {}
+        if (previous.get('id'), previous.get('version')) != (selection['id'], selection['version']):
+            changes.update(status='STYLE_SELECTED', plan_revision=None, confirmed_plan_revision=None)
+        return store.update(args.project_id, args.expected_revision, changes)
     if args.command in ('plan', 'revise'):
         from .plan import validate_plan, revise_plan
         plan = read_json(args.file)
@@ -146,8 +152,22 @@ def execute(args):
         selected = project.get('style') or {}
         if selected.get('id') != plan.get('style_id'):
             raise AutoCapcutError('E_PLAN', 'Plan style must match the user-selected project style.')
+        if not selected.get('version') or plan.get('style_version', selected['version']) != selected['version']:
+            raise AutoCapcutError('E_PLAN', 'Plan style version does not match the selected version.')
+        plan['style_version'] = selected['version']
         return store.save_plan(args.project_id, plan, args.expected_revision)
+    if args.command == 'set-mode':
+        return store.update(args.project_id, args.expected_revision, {'execution_preference': args.mode})
+    if args.command == 'confirm-plan':
+        from .plan import validate_plan
+        report = validate_plan(store.load_plan(args.project_id), store.load_assets(args.project_id))
+        if not report['ready_to_edit']:
+            raise AutoCapcutError('E_PLAN', 'Resolve plan questions and evidence before confirming it.')
+        return store.update(args.project_id, args.expected_revision, {'confirmed_plan_revision': project['plan_revision']})
     if args.command in ('pause', 'resume'):
+        if args.command == 'resume':
+            from .media import verify_sources
+            verify_sources(store.load_assets(args.project_id))
         return getattr(store, args.command)(args.project_id, args.expected_revision)
     if args.command == 'capabilities':
         from .adapter import OfficialAdapter
@@ -160,10 +180,20 @@ def execute(args):
             raise AutoCapcutError('E_AUTH', 'Uploading the selected local media requires explicit user approval.')
         if request['operation'] in ('rough_cut', 'apply_plan', 'revise', 'captions', 'audio', 'export'):
             from .plan import validate_plan
-            report = validate_plan(store.load_plan(args.project_id), store.load_assets(args.project_id))
+            plan = store.load_plan(args.project_id)
+            style = project.get('style') or {}
+            if (plan.get('style_id'), plan.get('style_version')) != (style.get('id'), style.get('version')):
+                raise AutoCapcutError('E_PLAN', 'Saved plan is stale for the selected style/version.', 'Create a new plan for the current selection.')
+            report = validate_plan(plan, store.load_assets(args.project_id))
             if not report.get('ready_to_edit'):
                 raise AutoCapcutError('E_PLAN', 'Plan has unresolved decisions or lacks actual content evidence.',
                                       'Inspect the media or obtain user annotations before editing.')
+            if project['execution_preference'] == 'plan-first' and project['confirmed_plan_revision'] != project['plan_revision']:
+                raise AutoCapcutError('E_APPROVAL', 'The user chose plan-first and has not confirmed this plan revision.',
+                                      'Show the current plan and record explicit confirmation; or follow the user’s request to switch to direct.')
+            from .media import verify_sources
+            referenced = {shot['asset_id'] for shot in plan['shots']} | {music['asset_id'] for music in plan.get('music', [])}
+            verify_sources(store.load_assets(args.project_id), referenced)
         prepared = OfficialAdapter(store.load_capabilities(args.project_id)).prepare(
             request['operation'], request['arguments'], operation_id=request['operation_id'])
         action = store.begin_operation(args.project_id, prepared['operation_id'], prepared['tool'],

@@ -97,6 +97,16 @@ class ActualDecodeTests(unittest.TestCase):
                         "-f", "lavfi", "-i", "sine=duration=2", "-c:v", "mpeg4", "-c:a", "aac", str(source)],
                        check=True, capture_output=True, timeout=30)
         self.assertEqual(inspect_media(source)["duration_us"], 1_000_000)
+
+    def test_mkv_stream_tag_bounds_video_when_container_audio_is_longer(self):
+        source = pathlib.Path(self.folder.name) / "tagged-duration.mkv"
+        ffmpeg = os.environ.get("AUTO_CAPCUT_FFMPEG") or shutil.which("ffmpeg")
+        subprocess.run([ffmpeg, "-v", "error", "-nostdin", "-f", "lavfi", "-i", "color=c=red:s=160x90:r=25:d=1",
+                        "-f", "lavfi", "-i", "sine=duration=2", "-c:v", "mpeg4", "-c:a", "pcm_s16le", str(source)],
+                       check=True, capture_output=True, timeout=30)
+        media = inspect_media(source)
+        self.assertEqual(media["duration_us"], 1_000_000)
+        self.assertGreaterEqual(media["container_duration_us"], 2_000_000)
         self.assertFalse(verify_media(source, {"duration_us": 1_000_000})["passed"])
 
 

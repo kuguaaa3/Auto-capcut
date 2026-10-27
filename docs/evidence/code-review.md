@@ -41,10 +41,10 @@ No extra UI or alternate editing engine was found.
 
 ## Resolution
 
-A single implementer is addressing all six distinct local findings with public
-regression tests in `implement/review-fixes`. The duplicate stale-style finding
-is tracked in both axes without changing their priorities. Final fix evidence
-and test results will be recorded in review-fixes.md before delivery.
+All six distinct local findings are fixed with public regression tests; the
+primary agent took over when the fix subagent hit an account usage limit before
+editing. The duplicate stale-style finding stays recorded in both axes without
+changing their priorities. See review-fixes.md: 65 tests passed, no skips.
 
 Initial totals: Standards 4 findings (worst P1 source-bound/stale-style errors);
 Spec 3 local findings (worst P1 stale-style/missing-source execution), plus the

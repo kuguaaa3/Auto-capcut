@@ -3,6 +3,7 @@
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -17,6 +18,31 @@ MEDIA_SUFFIXES = frozenset({
     ".mp3", ".wav", ".aac", ".m4a", ".flac", ".aiff", ".ogg", ".opus",
     ".png", ".jpg", ".jpeg", ".bmp", ".webp", ".tif", ".tiff", ".avif", ".gif",
 })
+
+
+def verify_sources(assets, asset_ids=None):
+    """Recheck referenced local bytes before resuming or issuing an editor write."""
+    checked = []
+    for asset in assets:
+        if asset_ids is not None and asset.get('asset_id') not in asset_ids:
+            continue
+        source = Path(asset.get('path', '')).expanduser()
+        if not source.is_file():
+            raise AutoCapcutError('E_MEDIA_MISSING', 'A referenced source file is missing.', 'Locate the source and re-inspect it before continuing.')
+        expected = asset.get('hash')
+        if not isinstance(expected, str) or re.fullmatch(r'[0-9a-f]{64}', expected) is None:
+            raise AutoCapcutError('E_MEDIA_CHANGED', 'Source integrity evidence is missing.', 'Re-inspect the source files.')
+        try:
+            digest = hashlib.sha256()
+            with source.open('rb') as stream:
+                while block := stream.read(1024 * 1024):
+                    digest.update(block)
+        except OSError as exc:
+            raise AutoCapcutError('E_MEDIA_READ', 'A referenced source cannot be read.', 'Check source permissions and re-inspect it.') from exc
+        if digest.hexdigest() != expected:
+            raise AutoCapcutError('E_MEDIA_CHANGED', 'Source bytes changed since inspection.', 'Re-inspect and replan; preserve the old project revision.')
+        checked.append(asset['asset_id'])
+    return checked
 
 
 def inspect_assets(paths, ffprobe=None):
@@ -136,8 +162,24 @@ def resolve_tool(name, explicit=None):
 
 
 def _duration_us(metadata, streams):
-    durations = [stream.get("duration") for stream in streams]
-    durations.append(metadata.get("format", {}).get("duration"))
+    durations = []
+    for stream in streams:
+        durations.append(stream.get('duration'))
+        try:
+            ticks = int(stream['duration_ts'])
+            value = Fraction(stream['time_base']) * ticks * 1_000_000
+            if value > 0:
+                durations.append(Decimal(value.numerator // value.denominator) / 1_000_000)
+        except (KeyError, ValueError, TypeError, ZeroDivisionError):
+            pass
+        for key, value in stream.get('tags', {}).items():
+            if key.casefold() == 'duration' and isinstance(value, str):
+                match = re.fullmatch(r'(\d+):([0-5]\d):([0-5]\d(?:\.\d+)?)', value)
+                if match:
+                    durations.append(Decimal(match[1]) * 3600 + Decimal(match[2]) * 60 + Decimal(match[3]))
+    # A container may include a longer audio tail. Never use it as a video bound.
+    if not streams:
+        durations.append(metadata.get("format", {}).get("duration"))
     for value in durations:
         try:
             seconds = Decimal(str(value))

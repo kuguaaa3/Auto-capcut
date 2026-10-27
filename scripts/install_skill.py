@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import stat
 import sys
+import time
 import uuid
 
 
@@ -28,9 +29,18 @@ def install(destination):
         # Rename within one filesystem; an existing target is never overwritten.
         if target.exists() or target.is_symlink():
             raise ValueError('Another installation appeared during staging; it was preserved.')
-        staging.rename(target)
-    except Exception:
-        raise ValueError(f'Installation incomplete. Prior installation is unchanged; staged files retained at {staging}.')
+        for attempt in range(3):
+            try:
+                if target.exists() or target.is_symlink():
+                    raise ValueError('Another installation appeared during staging; it was preserved.')
+                staging.rename(target)
+                break
+            except PermissionError as exc:
+                if os.name != 'nt' or getattr(exc, 'winerror', None) not in (5, 32, 33) or attempt == 2:
+                    raise
+                time.sleep(0.1 * (attempt + 1))
+    except (OSError, ValueError) as exc:
+        raise ValueError(f'Installation incomplete: {exc}. Prior installation is unchanged; staged files retained at {staging}.') from exc
     return {'status': 'installed', 'path': str(target), 'version': '0.1.0',
             'activation': 'Available to Codex on its next skill discovery; official CapCut authorization is separate.'}
 

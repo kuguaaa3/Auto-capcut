@@ -123,6 +123,7 @@ class StyleRegistry:
         style['status'] = 'draft'
         style['approved_at'] = datetime.now(timezone.utc).isoformat()
         style['version'] = '1.0.0'
+        self._validate(style)
         return self._persist(style)
 
     def rollback(self, style_id, version, *, approved=False):
@@ -193,6 +194,7 @@ class StyleRegistry:
             if prior:
                 major, minor, patch = self._version_key(prior[-1])
                 style['version'] = f'{major}.{minor}.{patch + 1}'
+            self._validate(style)
             target = versions / style['version']
             target.mkdir(parents=True, exist_ok=False)
             self._atomic_json(target / 'style.json', style)
@@ -282,12 +284,14 @@ class StyleRegistry:
             if parsed.username or parsed.password or parsed.query:
                 raise AutoCapcutError('E_STYLE_UNTRUSTED', '风格含私人或带授权参数的地址。', '只保留公开且无需凭据的来源链接。')
         path_content = re.sub(r'https://[^\s<>]+', '', content)
+        # Recognized display ratios are reusable configuration, not source times.
+        timed_content = re.sub(r'(?<![\d:])(?:9:16|16:9|4:3|3:4|1:1|21:9)(?![\d:])', '', content)
         unsafe_path = r'[a-zA-Z]:[\\/]|\\\\[^\s]+|\.\.[\\/]|(?<![:\w])/(?:[\w.-]+/)+'
         unsafe = (r'\b\d{1,2}:\d{2}(?::\d{2})?(?:\.\d+)?\b|source_(?:in|out)_us',
                   r'ignore\s+(?:all\s+)?(?:previous|prior)\s+instructions|忽略.{0,8}(?:指令|规则)',
                   r'\b(?:powershell|cmd\.exe|subprocess|os\.system|invoke-expression|curl|wget|npx)\b|\b(?:pip|npm)\s+install|\b(?:exec|eval)\s*\(',
                   r'api[_-]?key|access[_-]?token|credentials|\.codex|\.ssh|读取.{0,6}(?:凭据|密钥)')
-        if re.search(unsafe_path, path_content) or any(re.search(pattern, content, re.IGNORECASE) for pattern in unsafe):
+        if re.search(unsafe_path, path_content) or re.search(unsafe[0], timed_content) or any(re.search(pattern, content, re.IGNORECASE) for pattern in unsafe[1:]):
             raise AutoCapcutError('E_STYLE_UNTRUSTED', '风格包含路径、一次性时间码或越权执行/凭据指令。', '仅保留可迁移剪辑规则；人工审查并删除私人信息和可执行指令。')
 
     @staticmethod
