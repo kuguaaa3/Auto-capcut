@@ -28,3 +28,14 @@
 2. 检查本机 Codex/CapCut 能力，记录兼容性矩阵，不能在无授权环境宣称“接入成功”。
 3. 使用 Matt Pocock 工程 Skill 建立规格任务图与可测试接口；已有文档作为已确认需求，不要推翻重问。
 4. 实现、测试、复核后再更新本文件与 README 的状态。
+
+## Agent skills
+
+### Issue tracker
+GitHub Issues in kuguaaa3/Auto-capcut; see docs/agents/issue-tracker.md.
+
+### Triage labels
+Upstream default roles; see docs/agents/triage-labels.md.
+
+### Domain docs
+Single-context GLOSSARY.md and docs/adr/; see docs/agents/domain.md.
