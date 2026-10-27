@@ -42,6 +42,7 @@ def parser():
         if command == 'assets':
             item.add_argument('paths', nargs='+')
             item.add_argument('--ffprobe')
+            item.add_argument('--annotations', help='Actual user/frame/transcript evidence keyed by local source path')
         elif command == 'select':
             item.add_argument('--id', required=True)
             item.add_argument('--version')
@@ -61,6 +62,12 @@ def parser():
     qa.add_argument('--expected')
     qa.add_argument('--ffprobe')
     qa.add_argument('--ffmpeg')
+    frame = sub.add_parser('frame', help='Extract one source frame for Codex visual inspection')
+    frame.add_argument('path')
+    frame.add_argument('--at-us', type=int, required=True)
+    frame.add_argument('--output', required=True)
+    frame.add_argument('--ffprobe')
+    frame.add_argument('--ffmpeg')
     learn = sub.add_parser('learn', help='Save only an explicitly approved reusable style proposal')
     learn.add_argument('--file', required=True)
     learn.add_argument('--approved', action='store_true')
@@ -92,6 +99,9 @@ def execute(args):
         from .qa import verify_media
         return verify_media(args.path, read_json(args.expected) if args.expected else None,
                             ffprobe=args.ffprobe, ffmpeg=args.ffmpeg)
+    if args.command == 'frame':
+        from .media import extract_frame
+        return extract_frame(args.path, args.at_us, args.output, ffprobe=args.ffprobe, ffmpeg=args.ffmpeg)
     from .store import ProjectStore
     store = ProjectStore(args.workspace)
     if args.command == 'create':
@@ -110,6 +120,16 @@ def execute(args):
     if args.command == 'assets':
         from .media import inspect_assets
         assets = inspect_assets(args.paths, ffprobe=args.ffprobe)
+        if args.annotations:
+            annotations = read_json(args.annotations)
+            if not isinstance(annotations, list):
+                raise AutoCapcutError('E_MEDIA', 'Annotations must be a list of path and content_evidence records.')
+            by_path = {str(Path(asset['path']).resolve()): asset for asset in assets}
+            for record in annotations:
+                path = str(Path(record['path']).resolve())
+                if path not in by_path or not isinstance(record.get('content_evidence'), list):
+                    raise AutoCapcutError('E_MEDIA', 'Annotation does not match an inspected source file.')
+                by_path[path]['content_evidence'] = record['content_evidence']
         return store.save_assets(args.project_id, assets, args.expected_revision)
     if args.command == 'select':
         from .styles import StyleRegistry
