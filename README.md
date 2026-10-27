@@ -19,6 +19,13 @@
 5. 按 [验收清单](docs/ACCEPTANCE.md) 实测；未通过不可以宣称完成。
 6. [Codex Skill 入口草案](skills/auto-capcut/SKILL.md) 目前仅是**待实现合同**，不是已工作的自动剪辑工具。
 
+## 原始 Skill 研究资料
+
+- [10套原文只读 Skill 快照与许可证](research/upstream/README.md)
+- [10类主风格规范](docs/STYLE_PRESETS.md)
+- [数据合同](docs/DATA_CONTRACTS.md)、[演示场景](docs/DEMO_SCENARIOS.md)
+- [交接包审计签收](docs/AUDIT_SIGNOFF.md)、[环境待验证项目](docs/OPEN_ENVIRONMENT_QUESTIONS.md)
+
 ## 开发环境管理
 
 按照 [mattpocock/skills](https://github.com/mattpocock/skills) 当前官方 README，为 Codex 安装其工程技能：
