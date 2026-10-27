@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "id": "talking-head",
+  "name": "口播精剪",
+  "description": "含清晰讲话与可核对语义的口播",
+  "source": "builtin",
+  "version": "1.0.0",
+  "compatibility": [
+    "capcut_official"
+  ],
+  "trust": "reviewed-knowledge",
+  "status": "draft",
+  "review_gates": ["meaning_preserved","speech_caption_sync"],
+  "approved_at": null,
+  "suitable_for": "含清晰讲话与可核对语义的口播",
+  "not_suitable_for": "无法核对原意或音频缺失的素材",
+  "inputs": [
+    "可读取且允许使用的素材",
+    "实际内容证据或用户明确标注",
+    "目标时长与画幅"
+  ],
+  "default_behavior": "用户显式要求优先；按素材证据调整节奏，不机械套用固定镜头秒数。",
+  "decision_rules": [
+    "先核对语音或用户提供的原稿，保留否定词、限定词与完整论证。",
+    "按句界与气口精简卡顿，不删除改变原意的停顿或语句。",
+    "字幕按真实发声同步，相关证据画面只在支撑语义时加入。"
+  ],
+  "required_capabilities": [
+    "material-analysis",
+    "speech",
+    "captions",
+    "audio",
+    "qa"
+  ],
+  "quality_rules": [
+    "原意未变、字音完整、字幕可读同步",
+    "计划边界正确；导出媒体与可编辑工程分别验收。"
+  ],
+  "anti_patterns": [
+    "删除否定词改变原意",
+    "无关 B-roll 打断解释"
+  ],
+  "fallback": "素材证据不足则标缺；官方能力未验证则 blocked，不切换编辑引擎。",
+  "origin": [
+    {
+      "name": "cut-as-code",
+      "url": "https://github.com/WhiteTowerAI/cut-as-code/blob/main/skills/cut-as-code/SKILL.md",
+      "blob_sha": "bea91c5df055546b0a02d6038296bb327cc054b4",
+      "license": "MIT",
+      "license_path": "../../references/licenses/cut-as-code.txt",
+      "trust": "research-only"
+    },
+    {
+      "name": "talkcraft",
+      "url": "https://github.com/Vincentwei1021/video-talkcraft/blob/main/SKILL.md",
+      "blob_sha": "70170e660731f78c3af34c34c8432ed734cc4ea6",
+      "license": "PolyForm-Noncommercial-1.0.0",
+      "license_path": "../../references/licenses/talkcraft.txt",
+      "trust": "research-only"
+    }
+  ],
+  "license": "Personal noncommercial project; retain each upstream license"
+}

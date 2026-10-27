@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "id": "vlog-documentary-lite",
+  "name": "生活轻纪录",
+  "description": "旅行、日常与真实场景记录",
+  "source": "builtin",
+  "version": "1.0.0",
+  "compatibility": [
+    "capcut_official"
+  ],
+  "trust": "reviewed-knowledge",
+  "status": "draft",
+  "review_gates": ["real_time_space","scene_sound_preserved"],
+  "approved_at": null,
+  "suitable_for": "旅行、日常与真实场景记录",
+  "not_suitable_for": "必须重编事实顺序才成立的叙事",
+  "inputs": [
+    "可读取且允许使用的素材",
+    "实际内容证据或用户明确标注",
+    "目标时长与画幅"
+  ],
+  "default_behavior": "用户显式要求优先；按素材证据调整节奏，不机械套用固定镜头秒数。",
+  "decision_rules": [
+    "用实拍时间与空间线索串联场景，必要时用环境镜头交代位置。",
+    "保留有辨识度的现场声音，音乐只辅助情绪。",
+    "B-roll 补充当前场景事实，不以无关镜头假装现场。"
+  ],
+  "required_capabilities": [
+    "material-analysis",
+    "narrative",
+    "audio",
+    "qa"
+  ],
+  "quality_rules": [
+    "时空连贯自然，环境声音可感知",
+    "计划边界正确；导出媒体与可编辑工程分别验收。"
+  ],
+  "anti_patterns": [
+    "转场破坏真实时间流",
+    "无关素材冒充现场记录"
+  ],
+  "fallback": "素材证据不足则标缺；官方能力未验证则 blocked，不切换编辑引擎。",
+  "origin": [
+    {
+      "name": "storyline-style",
+      "url": "https://github.com/FireRedTeam/FireRed-OpenStoryline/blob/main/.storyline/skills/create_profile_style_skill/SKILL.md",
+      "blob_sha": "c098c0691a8e2f5780b4d724b63e8abc76a6925c",
+      "license": "Apache-2.0",
+      "license_path": "../../references/licenses/storyline-style.txt",
+      "trust": "research-only"
+    },
+    {
+      "name": "clip-skills",
+      "url": "https://github.com/appergb/ClipSkills/blob/main/clip-skills/SKILL.md",
+      "blob_sha": "329c50d23783bbb5b4aa39dc7d2ec855cc00738c",
+      "license": "MIT",
+      "license_path": "../../references/licenses/clip-skills.txt",
+      "trust": "research-only"
+    }
+  ],
+  "license": "Personal noncommercial project; retain each upstream license"
+}
