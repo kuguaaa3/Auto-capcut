@@ -56,3 +56,12 @@ contract tests are labeled local; no mock result counts as CapCut acceptance.
 Update a per-ticket evidence/status ledger, review both standards and spec against
 the pinned base, and report verified/unverified separately. Never close a ticket
 whose DoD still depends on unavailable authorization, media or real application QA.
+
+## Development delivery checkpoint
+
+The user subsequently deferred real acceptance. Local delivery now includes all
+independent implementation slices, the six distinct two-axis review fixes,
+65 passing tests without skips on the target Windows machine and hosted Windows/
+Ubuntu CI, and a uniquely discovered enabled installation of auto-capcut.
+T01/T03/T04/T05 are locally verified and closed; the spec and real-environment
+tickets remain open. Final evidence lives in docs/evidence/ and ACCEPTANCE_STATUS.

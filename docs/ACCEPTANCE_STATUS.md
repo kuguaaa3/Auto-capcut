@@ -24,7 +24,7 @@ as a condition of this development delivery. Deferred checks stay unverified.
   decode/defect QA, style lifecycle and recovery checks.
 
 Evidence: local-store.md, local-styles.md and local-media.md under docs/evidence/.
-At the integration point before review fixes: 59 tests passed with actual native
+After the review fixes: 65 tests passed with actual native
 ffprobe/full FFmpeg, no skipped tests. Technical fixtures only verify local
 inspection and decode; they are never counted as actual CapCut editing.
 
@@ -32,8 +32,8 @@ inspection and decode; they are never counted as actual CapCut editing.
 
 | Group | Current result |
 |---|---|
-| A01 discovery | Installation/native discovery validation pending final review. |
-| A02–A05, A07–A11, A13–A16 | Local contracts implemented and tested, subject to independent review fixes. Actual editor behavior remains separately unverified. |
+| A01 discovery | Passed locally: native Codex skills/list returns exactly one enabled auto-capcut, with no discovery error. |
+| A02–A05, A07–A11, A13–A16 | Local contracts implemented and tested; six distinct review findings fixed. Actual editor behavior remains separately unverified. |
 | A06 ten styles | Format, source and local recorded-review cases tested; real per-style sample quality unverified. |
 | A12 learned rules | Path/timecode/unsafe-directive gates and portable versioning tested; semantic privacy review and real reuse unverified. |
 | B01–B10 | Blocked/not run. Plugin installation succeeded, account authorization did not; no user clips/upload scope supplied. |
@@ -43,6 +43,11 @@ inspection and decode; they are never counted as actual CapCut editing.
 | D05–D06 | Skill routes preserve explicit choices and concise interaction; real user-flow observation pending. |
 | D07 | Local output checks implemented; no actual CapCut output path to accept. |
 | D08 | README, capability matrix and issues explicitly disclose incomplete acceptance. |
+
+Installation evidence is in evidence/skill-installation.json. The standalone
+installed CLI executes, all eleven Skill frontmatter checks pass, and the native
+discovery check finds a single enabled user-scope entry. See code-review.md and
+review-fixes.md for the independent reports, resolutions and scope limits.
 
 ## External blockers and exact recovery
 
