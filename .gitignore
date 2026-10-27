@@ -1,0 +1,22 @@
+# Local user media and generated projects must not enter the source repository
+auto-capcut-workspace/
+materials/
+projects/
+learned-skills/
+custom-skills/
+research/cache/
+.cache/
+.scratch/
+.env
+.env.*
+*.mp4
+*.mov
+*.mkv
+*.mp3
+*.wav
+*.aiff
+*.webm
+*.zip
+__pycache__/
+.pytest_cache/
+node_modules/
