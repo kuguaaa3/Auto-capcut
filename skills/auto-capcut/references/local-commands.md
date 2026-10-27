@@ -11,7 +11,8 @@ the source repository. No daemon, network editor or database is started.
 | styles [--query TEXT] [--id ID --version SEMVER] | Discover builtin/custom/learned rules; an invalid explicit selection is an error. |
 | create --name NAME --goal GOAL [--format FORMAT] | New independent local project; default mp4 and capcut delivery preferences. |
 | projects / show ID / context ID | Read persistent state; context includes source inventory, saved plan, capability and operation history. |
-| assets ID PATH... --expected-revision N [--ffprobe PATH] | Probe media, hash sources, save immutable inventory. Folders expand supported local media. |
+| assets ID PATH... --expected-revision N [--ffprobe PATH --annotations JSON] | Probe media, hash sources, save immutable inventory. Folders expand supported local media. Optional actual evidence is keyed by matching source path. |
+| frame FILE --at-us N --output PNG [--ffprobe PATH --ffmpeg PATH] | Extract a source frame for actual visual inspection. Extraction alone leaves content_reviewed=false. |
 | select ID --id STYLE [--version SEMVER] --expected-revision N | Lock an explicitly user-selected style version. |
 | plan ID --file PLAN --expected-revision N | Validate and save a local plan; never edits a video. |
 | revise ID --file PATCH --expected-revision N | Save a changed local plan revision; never substitutes for actual editing. |

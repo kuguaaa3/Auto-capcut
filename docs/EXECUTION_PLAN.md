@@ -44,9 +44,10 @@ contract tests are labeled local; no mock result counts as CapCut acceptance.
 - Official page links to a vendor-hosted installation Skill, advertising 0.2.6.
 - CapCut 0.2.6 installed and enabled under the managed marketplace; configured
   account endpoint is https://www.capcut.com/api/external_mcp.
-- Read-only connection helper returned login_required. OAuth helper is active
-  and the in-app browser visibly shows the CapCut sign-in page. Authorization
-  is pending, not successful. No editing capability has been marked supported.
+- Read-only connection helper returned login_required. The in-app browser visibly
+  showed the CapCut sign-in page; the OAuth helper subsequently exited 1 with
+  success=false, timed out waiting for OAuth callback. Authorization is incomplete.
+  The stale page was closed. No editing capability has been marked supported.
 - No user-approved local media folder has yet been supplied. Requested at least
   three clips and explicit approval before uploading to CapCut.
 
