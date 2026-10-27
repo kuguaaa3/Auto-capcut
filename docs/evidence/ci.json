@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-27",
+  "validated_code_revision": "44cf00c7f2e298a34938c1c99f76d15ab80752d5",
+  "workflow": "Local contract checks",
+  "runs": [
+    {"id": 40495068920, "url": "https://github.com/kuguaaa3/Auto-capcut/actions/runs/40495068920", "status": "success"},
+    {"id": 40495064211, "url": "https://github.com/kuguaaa3/Auto-capcut/actions/runs/40495064211", "status": "success"}
+  ],
+  "platforms": ["ubuntu-latest", "windows-latest"],
+  "tests_per_platform": 65,
+  "skipped_tests": 0,
+  "native_inspection_binaries_required": true,
+  "compileall": "passed",
+  "scope": "local contracts and actual technical-media inspection/decode; not CapCut acceptance"
+}

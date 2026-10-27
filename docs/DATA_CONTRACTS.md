@@ -9,6 +9,8 @@
 - `style`: 主风格 id、来源、版本、confirmed_by_user、options。
 - `preferred_formats`: 用户需要视频/CapCut/剪映草稿。
 - `current_revision`, `last_verified_revision`。
+- `execution_preference`: `direct`（默认）或 `plan-first`，用户可随时修改并持久保存。
+- `confirmed_plan_revision`: 用户明确审定的当前计划版本或 null；改计划/素材/风格后失效。
 - `editor`: backend=capcut_official（常规）/jianying_compat（显式可选）、capability_snapshot_id。
 - `last_error`: code、human_message、recover_action（成功时为null）。
 
@@ -41,6 +43,8 @@
 }
 ```
 该例仅描述示意片段，非已经读取过的真实狗狗素材。实际计划必须校验每个 asset 时长、片段前后不颠倒、目标时间线可解析、字幕落在目标视频范围内。
+落盘时同时固定 `style_version`；执行边界必须与 project.style 的 ID/版本一致。
+正式编辑前重查源文件和 SHA-256，不能仅信任 assets.json 中的旧 exists 标记。
 
 ## operations.jsonl
 一行一个操作事件（操作ID、项目版本、外部工具名、工具调用参数的可公开部分、执行前计划/后状态、成功/失败、可恢复信息、时间）。

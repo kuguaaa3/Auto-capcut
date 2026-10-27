@@ -1,0 +1,83 @@
+{
+  "observed_on": "2026-10-27",
+  "timezone": "Asia/Shanghai",
+  "platform": "Windows 10 build 19045",
+  "codex_cli_version": "0.164.0-alpha.11.1",
+  "matt_pocock": {
+    "plugin_id": "mattpocock-skills@mattpocock",
+    "installed_version": "1.3.1",
+    "reference_commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+    "installation": "verified installed and enabled through native CLI",
+    "workflow": [
+      "setup-matt-pocock-skills",
+      "to-spec",
+      "to-tickets",
+      "implement-spec",
+      "tdd",
+      "code-review"
+    ]
+  },
+  "capcut": {
+    "plugin_id": "CapCut@CapCut",
+    "plugin_version": "0.2.6",
+    "official_source": "https://www.capcut.com/tools/capcut-x-codex",
+    "installer_skill": "https://sf16-sg.tiktokcdn.com/obj/eden-sg/962370eh7nupenuhbo/capcut_codex_plugin/SKILL.md",
+    "endpoint": "https://www.capcut.com/api/external_mcp",
+    "installation": "verified installed and enabled, managed marketplace and helpers present",
+    "connection_check": "connected",
+    "authorization": "complete",
+    "authorization_result": "official helper event=completed, success=true; process exit 0",
+    "authorization_process_exit_code": 0,
+    "protected_native_tools_discovered_in_this_chat": [
+      "search_capcut_material",
+      "capcut_asset_upload_credential",
+      "capcut_batch_media_url",
+      "capcut_ailab_start_edit",
+      "capcut_ailab_poll_edit_progress",
+      "capcut_ailab_submit_plan_response",
+      "auto_caption_submit",
+      "auto_caption_query",
+      "start_stdraft_session",
+      "check_stdraft_state",
+      "get_stdraft_snapshot",
+      "push_stdraft_snapshot"
+    ],
+    "identity_free_presentation_tools_now_visible": [
+      "background_music",
+      "billing_confirmation",
+      "editing_plan",
+      "templates_preview",
+      "templates_preview_v2",
+      "video_preview"
+    ],
+    "actual_editing": "deferred_by_user",
+    "real_media_export": "not_run",
+    "editable_project_reopen": "not_run",
+    "previous_authorization_result": "timed out waiting for OAuth callback",
+    "protected_readonly_check": {
+      "tool": "search_capcut_material",
+      "arguments": {
+        "type": "font",
+        "prompt": "font",
+        "top_n": 1
+      },
+      "result": "success",
+      "item_count": 1,
+      "returned_title": "ZY Resolve",
+      "returned_resource_id": "7317175475195875841"
+    }
+  },
+  "media_permission": {
+    "latest_user_instruction": "先不用完成真实验收",
+    "real_acceptance": "deferred_by_user",
+    "user_folder_provided": false,
+    "three_user_clips_available": false,
+    "upload_approved": false
+  },
+  "jianying": {
+    "installed_application_seen": true,
+    "compatibility": "unknown",
+    "actual_open_modify_save_reopen": "not_run"
+  },
+  "recovery": "Authorization complete and one protected read-only tool succeeded. Real acceptance remains deferred by user; resume it only when requested with approved footage and upload scope."
+}

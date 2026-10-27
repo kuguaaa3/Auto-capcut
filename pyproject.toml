@@ -1,0 +1,10 @@
+[project]
+name = "auto-capcut"
+version = "0.1.0"
+description = "Local support tools for a Codex-native official CapCut Skill"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.auto-capcut]
+entry = "skills/auto-capcut/scripts/auto_capcut.py"
+test-command = "python -m unittest discover -s tests -v"

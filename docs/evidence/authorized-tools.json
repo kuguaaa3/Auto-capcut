@@ -1,0 +1,96 @@
+{
+  "observed_on": "2026-10-27",
+  "plugin_version": "0.2.6",
+  "source": "Current native MCP tool declarations exposed after successful OAuth",
+  "tools": {
+    "search_capcut_material": {
+      "observed_input_fields": [
+        "type",
+        "prompt",
+        "top_n"
+      ],
+      "invocation_verified": true
+    },
+    "capcut_asset_upload_credential": {
+      "observed_input_fields": [
+        "files",
+        "version"
+      ],
+      "invocation_verified": false
+    },
+    "capcut_batch_media_url": {
+      "observed_input_fields": [
+        "uris",
+        "vids"
+      ],
+      "invocation_verified": false
+    },
+    "capcut_ailab_start_edit": {
+      "observed_input_fields": [
+        "assets",
+        "query"
+      ],
+      "invocation_verified": false
+    },
+    "capcut_ailab_poll_edit_progress": {
+      "observed_input_fields": [
+        "session_id",
+        "after_event_id"
+      ],
+      "invocation_verified": false
+    },
+    "capcut_ailab_submit_plan_response": {
+      "observed_input_fields": [
+        "session_id",
+        "after_event_id",
+        "card_id",
+        "response_text"
+      ],
+      "invocation_verified": false
+    },
+    "auto_caption_submit": {
+      "observed_input_fields": [
+        "draft_session_id",
+        "resources",
+        "unique_key"
+      ],
+      "invocation_verified": false
+    },
+    "auto_caption_query": {
+      "observed_input_fields": [
+        "unique_key"
+      ],
+      "invocation_verified": false
+    },
+    "start_stdraft_session": {
+      "observed_input_fields": [],
+      "invocation_verified": false
+    },
+    "check_stdraft_state": {
+      "observed_input_fields": [
+        "session_id",
+        "local_package_id"
+      ],
+      "invocation_verified": false
+    },
+    "get_stdraft_snapshot": {
+      "observed_input_fields": [
+        "session_id"
+      ],
+      "invocation_verified": false
+    },
+    "push_stdraft_snapshot": {
+      "observed_input_fields": [
+        "session_id",
+        "base_package_id",
+        "stdraft_json"
+      ],
+      "invocation_verified": false
+    }
+  },
+  "notes": [
+    "Field lists are discovery evidence, not complete executable schemas or automatic adapter bindings.",
+    "Only the protected font search was called. No upload, draft, edit, generation or export was performed.",
+    "Tool visibility does not verify operation support. Actual editor and media acceptance remain deferred."
+  ]
+}

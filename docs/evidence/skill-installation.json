@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-27",
+  "timezone": "Asia/Shanghai",
+  "skill_version": "0.1.0",
+  "installation": "completed from reviewed local bundle",
+  "installed_scope": "user",
+  "discovery_method": "native Codex app-server skills/list, forceReload=true",
+  "discovery_reference": "https://learn.chatgpt.com/docs/app-server",
+  "matching_auto_capcut_entry_count": 1,
+  "enabled": true,
+  "auto_capcut_discovery_errors": [],
+  "root_and_ten_style_frontmatter_validations": "passed",
+  "installed_cli_route_smoke_check": "passed",
+  "temporary_copy_standalone_execution": "passed",
+  "occupied_target_reinstallation": "rejected and existing installation preserved",
+  "official_capcut_account_authorization": "complete; official OAuth helper success+exit 0 and protected read-only search succeeded; real editing deferred by user"
+}

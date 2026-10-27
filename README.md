@@ -1,8 +1,27 @@
 # Auto-capcut
 
-**Codex 原生 AI 剪辑 Skill | 开发交接包（不是已完成的软件）**
+**Codex 原生 AI 剪辑 Skill | 开发中：本地工具已实现，官方真机验收未通过**
 
-> 截至 2026-10-27，仓库首先保存经过开发审计的需求、架构、交互路由、开源 Skill 调研、实施计划与验收标准。CapCut 官方连接、真实草稿及视频导出必须在目标电脑实测，不能仅凭文档宣称完成。
+> 截至 2026-10-27，已实施本地项目状态、版本与恢复、十种风格治理、真实媒体检查、计划校验、QA 和原生工具衔接。官方 CapCut 0.2.6 已安装并完成账号授权，受保护的字体查询已成功返回；尚未生成或验收真实 CapCut 工程/成片，真实验收按用户要求暂缓。整体产品尚未完成。
+
+当前成果：[草稿 PR #12](https://github.com/kuguaaa3/Auto-capcut/pull/12)、[规格与任务](https://github.com/kuguaaa3/Auto-capcut/issues/1)、[验收状态](docs/ACCEPTANCE_STATUS.md)、[实际能力矩阵](docs/evidence/capability-matrix.md)。
+
+用户已明确暂缓真实验收。本次继续交付本地实现、审查修复和安装验证；真机项目保留为未验证，不据此宣称自动剪辑闭环已经可用。
+
+## 本地运行与安装
+
+Python 3.11+，无第三方 Python 运行依赖。媒体检查需已有的原生 ffprobe 与完整视频版 FFmpeg；它们只用于检查/解码/抽帧，不作为替代剪辑引擎。可通过 PATH 或 `AUTO_CAPCUT_FFPROBE` / `AUTO_CAPCUT_FFMPEG` 指定。CI 为检查安装 FFmpeg。
+
+```text
+python skills/auto-capcut/scripts/auto_capcut.py --help
+python skills/auto-capcut/scripts/auto_capcut.py styles --query 宠物
+python skills/auto-capcut/scripts/auto_capcut.py doctor --check-connection
+python scripts/install_skill.py
+```
+
+安装器将整个 Skill 复制到当前 Codex 数据目录的 `skills/auto-capcut`，保留已有安装且不覆盖；`--dest` 可选择空的验证目录。新会话或 Skill 重新发现后可使用 `$auto-capcut`。这不代替官方 CapCut 插件安装、账号授权和真实功能验收。
+
+本地辅助检查：`python -m unittest discover -s tests -v`。配置原生媒体工具后，技术测试会实际创建临时媒体并执行探测/解码；这些技术样本不属于用户素材，也不满足 B/C 类真实剪辑验收。详细公共接口在 Skill 自带的 references/ 中。
 
 ## 一句话产品定义
 
@@ -17,7 +36,7 @@
 3. 阅读 [优秀开源 Skill 清单](docs/RESEARCHED_SKILLS.md)、[Skill 生命周期](docs/SKILL_GOVERNANCE.md)、[CapCut 适配验收](docs/CAPCUT_ADAPTER.md)。
 4. 按 [Matt Pocock 工程流程](docs/ENGINEERING_WORKFLOW.md) 和 [任务图](docs/IMPLEMENTATION_TICKETS.md) 开发。
 5. 按 [验收清单](docs/ACCEPTANCE.md) 实测；未通过不可以宣称完成。
-6. [Codex Skill 入口草案](skills/auto-capcut/SKILL.md) 目前仅是**待实现合同**，不是已工作的自动剪辑工具。
+6. [Codex Skill 入口](skills/auto-capcut/SKILL.md) 及随包脚本是已实施的本地编排辅助；官方编辑路径仍受真实能力矩阵约束。
 
 ## 原始 Skill 研究资料
 
