@@ -48,6 +48,9 @@ contract tests are labeled local; no mock result counts as CapCut acceptance.
   showed the CapCut sign-in page; the OAuth helper subsequently exited 1 with
   success=false, timed out waiting for OAuth callback. Authorization is incomplete.
   The stale page was closed. No editing capability has been marked supported.
+- Later authorization recovery completed successfully (official helper success,
+  exit 0), and a protected native font query returned a real result. Connection
+  and tool discovery are verified; real editing remains deferred by the user.
 - No user-approved local media folder has yet been supplied. Requested at least
   three clips and explicit approval before uploading to CapCut.
 

@@ -36,7 +36,8 @@ inspection and decode; they are never counted as actual CapCut editing.
 | A02–A05, A07–A11, A13–A16 | Local contracts implemented and tested; six distinct review findings fixed. Actual editor behavior remains separately unverified. |
 | A06 ten styles | Format, source and local recorded-review cases tested; real per-style sample quality unverified. |
 | A12 learned rules | Path/timecode/unsafe-directive gates and portable versioning tested; semantic privacy review and real reuse unverified. |
-| B01–B10 | Blocked/not run. Plugin installation succeeded, account authorization did not; no user clips/upload scope supplied. |
+| B01 | Passed: official OAuth helper completed successfully and a protected native font search returned a real result. |
+| B02–B10 | Deferred/not run. Account authorization is complete; actual footage/editing/export acceptance remains deferred by user. |
 | C01–C03 | Unknown/not run. Installed Jianying observed; no real draft compatibility measured. |
 | C04 | Explicit unsupported/unknown format guidance implemented; no verified alternative artifact yet exists. |
 | D01–D04 | Not run: require real user footage, listening/viewing and actual output. |
@@ -51,15 +52,14 @@ review-fixes.md for the independent reports, resolutions and scope limits.
 
 ## External blockers and exact recovery
 
-Official CapCut 0.2.6 remains installed. The official account helper returned
-login_required; OAuth later returned success=false with
-`timed out waiting for OAuth callback` and exit code 1. The expired authorization
-page was closed. No credentials, callback codes or authorization URLs are stored
-in this repository. See evidence/environment.json and capability-matrix.md.
+Official CapCut 0.2.6 is installed and now authorized. Following earlier timeouts,
+the fresh OAuth helper returned completed/success=true and exit 0. A protected
+native font query succeeded. Actual available tool names/fields and the safe
+result are recorded in evidence/authorized-tools.json and environment.json.
+No credentials, callback codes or authorization URLs are stored in this repository.
 
-To continue: finish only the installed capcut_creation account authorization,
-discover current native protected tools and schemas, and supply at least three
-videos the user permits uploading to CapCut. Resume T02, then T06–T13 in dependency
+When the user resumes real acceptance: supply at least three videos with explicit
+CapCut upload scope. Continue T02, then T06–T13 in dependency
 order and execute each B/D check. Keep domestic Jianying support unknown until
 the target application actually opens, modifies, saves and reopens its draft.
 

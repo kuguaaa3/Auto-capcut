@@ -13,5 +13,5 @@
   "installed_cli_route_smoke_check": "passed",
   "temporary_copy_standalone_execution": "passed",
   "occupied_target_reinstallation": "rejected and existing installation preserved",
-  "official_capcut_account_authorization": "separate, incomplete; real acceptance deferred by user"
+  "official_capcut_account_authorization": "complete; official OAuth helper success+exit 0 and protected read-only search succeeded; real editing deferred by user"
 }

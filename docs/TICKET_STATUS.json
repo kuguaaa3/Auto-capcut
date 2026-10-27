@@ -21,7 +21,7 @@
       ],
       "verification_scope": "local_only",
       "real_acceptance": "deferred_by_user",
-      "summary": "本地辅助部分已实现；官方账号执行和/或真实验收暂缓，完整 DoD 未达到。"
+      "summary": "官方授权和受保护只读调用已验证；本票所需的真实剪辑/工程/内容验收按用户要求暂缓，完整 DoD 未达到。"
     },
     "T03": {
       "issue": 4,
@@ -65,7 +65,7 @@
       ],
       "verification_scope": "local_only",
       "real_acceptance": "deferred_by_user",
-      "summary": "本地辅助部分已实现；官方账号执行和/或真实验收暂缓，完整 DoD 未达到。"
+      "summary": "官方授权和受保护只读调用已验证；本票所需的真实剪辑/工程/内容验收按用户要求暂缓，完整 DoD 未达到。"
     },
     "T07": {
       "issue": 8,
@@ -76,7 +76,7 @@
       ],
       "verification_scope": "local_only",
       "real_acceptance": "deferred_by_user",
-      "summary": "本地辅助部分已实现；官方账号执行和/或真实验收暂缓，完整 DoD 未达到。"
+      "summary": "官方授权和受保护只读调用已验证；本票所需的真实剪辑/工程/内容验收按用户要求暂缓，完整 DoD 未达到。"
     },
     "T08": {
       "issue": 9,
@@ -87,7 +87,7 @@
       ],
       "verification_scope": "local_only",
       "real_acceptance": "deferred_by_user",
-      "summary": "本地辅助部分已实现；官方账号执行和/或真实验收暂缓，完整 DoD 未达到。"
+      "summary": "官方授权和受保护只读调用已验证；本票所需的真实剪辑/工程/内容验收按用户要求暂缓，完整 DoD 未达到。"
     },
     "T09": {
       "issue": 10,
@@ -98,7 +98,7 @@
       ],
       "verification_scope": "local_only",
       "real_acceptance": "deferred_by_user",
-      "summary": "本地辅助部分已实现；官方账号执行和/或真实验收暂缓，完整 DoD 未达到。"
+      "summary": "官方授权和受保护只读调用已验证；本票所需的真实剪辑/工程/内容验收按用户要求暂缓，完整 DoD 未达到。"
     },
     "T10": {
       "issue": 11,
@@ -109,7 +109,7 @@
       ],
       "verification_scope": "local_only",
       "real_acceptance": "deferred_by_user",
-      "summary": "本地辅助部分已实现；官方账号执行和/或真实验收暂缓，完整 DoD 未达到。"
+      "summary": "官方授权和受保护只读调用已验证；本票所需的真实剪辑/工程/内容验收按用户要求暂缓，完整 DoD 未达到。"
     },
     "T11": {
       "issue": 13,
@@ -120,7 +120,7 @@
       ],
       "verification_scope": "local_only",
       "real_acceptance": "deferred_by_user",
-      "summary": "本地辅助部分已实现；官方账号执行和/或真实验收暂缓，完整 DoD 未达到。"
+      "summary": "官方授权和受保护只读调用已验证；本票所需的真实剪辑/工程/内容验收按用户要求暂缓，完整 DoD 未达到。"
     },
     "T12": {
       "issue": 14,
@@ -131,7 +131,7 @@
       ],
       "verification_scope": "local_only",
       "real_acceptance": "deferred_by_user",
-      "summary": "本地辅助部分已实现；官方账号执行和/或真实验收暂缓，完整 DoD 未达到。"
+      "summary": "官方授权和受保护只读调用已验证；本票所需的真实剪辑/工程/内容验收按用户要求暂缓，完整 DoD 未达到。"
     },
     "T13": {
       "issue": 15,
@@ -142,7 +142,7 @@
       ],
       "verification_scope": "local_only",
       "real_acceptance": "deferred_by_user",
-      "summary": "本地辅助部分已实现；官方账号执行和/或真实验收暂缓，完整 DoD 未达到。"
+      "summary": "官方授权和受保护只读调用已验证；本票所需的真实剪辑/工程/内容验收按用户要求暂缓，完整 DoD 未达到。"
     }
   }
 }

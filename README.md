@@ -2,7 +2,7 @@
 
 **Codex 原生 AI 剪辑 Skill | 开发中：本地工具已实现，官方真机验收未通过**
 
-> 截至 2026-10-27，已实施本地项目状态、版本与恢复、十种风格治理、真实媒体检查、计划校验、QA 和原生工具衔接。官方 CapCut 0.2.6 已安装，账号授权等待回调超时；尚无用户批准的验收素材，未生成或验收真实 CapCut 工程/成片。整体产品尚未完成。
+> 截至 2026-10-27，已实施本地项目状态、版本与恢复、十种风格治理、真实媒体检查、计划校验、QA 和原生工具衔接。官方 CapCut 0.2.6 已安装并完成账号授权，受保护的字体查询已成功返回；尚未生成或验收真实 CapCut 工程/成片，真实验收按用户要求暂缓。整体产品尚未完成。
 
 当前成果：[草稿 PR #12](https://github.com/kuguaaa3/Auto-capcut/pull/12)、[规格与任务](https://github.com/kuguaaa3/Auto-capcut/issues/1)、[验收状态](docs/ACCEPTANCE_STATUS.md)、[实际能力矩阵](docs/evidence/capability-matrix.md)。
 
