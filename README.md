@@ -6,6 +6,8 @@
 
 当前成果：[草稿 PR #12](https://github.com/kuguaaa3/Auto-capcut/pull/12)、[规格与任务](https://github.com/kuguaaa3/Auto-capcut/issues/1)、[验收状态](docs/ACCEPTANCE_STATUS.md)、[实际能力矩阵](docs/evidence/capability-matrix.md)。
 
+用户已明确暂缓真实验收。本次继续交付本地实现、审查修复和安装验证；真机项目保留为未验证，不据此宣称自动剪辑闭环已经可用。
+
 ## 本地运行与安装
 
 Python 3.11+，无第三方 Python 运行依赖。媒体检查需已有的原生 ffprobe 与完整视频版 FFmpeg；它们只用于检查/解码/抽帧，不作为替代剪辑引擎。可通过 PATH 或 `AUTO_CAPCUT_FFPROBE` / `AUTO_CAPCUT_FFMPEG` 指定。CI 为检查安装 FFmpeg。

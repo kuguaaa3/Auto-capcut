@@ -5,6 +5,11 @@ CapCut edit, MP4 export, editable-project reopen or Jianying compatibility test
 has occurred. PR #12 must remain draft. Original ACCEPTANCE.md boxes remain
 unchecked until their precise claims have corresponding evidence.
 
+Latest user instruction: **先不用完成真实验收**. Real B/C/D media acceptance is
+now deferred by the user. Continue and deliver local implementation, regression
+fixes, installation and review; do not request footage or restart authorization
+as a condition of this development delivery. Deferred checks stay unverified.
+
 ## Completed local implementation
 
 - T01 engineering plugin setup, GitHub spec #1, T01–T13 child issues with native

@@ -27,6 +27,8 @@
     "editable_project_reopen": "not_run"
   },
   "media_permission": {
+    "latest_user_instruction": "先不用完成真实验收",
+    "real_acceptance": "deferred_by_user",
     "user_folder_provided": false,
     "three_user_clips_available": false,
     "upload_approved": false
